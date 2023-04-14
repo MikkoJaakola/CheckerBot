@@ -7,19 +7,23 @@ import time
 
 url="https://toas.fi/nopeasti-saatavilla/"
 
-driver = Chrome(service=Service(ChromeDriverManager().install()))
+modific_time = "nill"
 
-# Open toas website
-driver.get(url)
+def getModifiedTime():
+    driver = Chrome(service=Service(ChromeDriverManager().install()))
 
-time.sleep(5)
+    # Open toas website
+    driver.get(url)
 
-# click cookie consent button
-driver.find_element("xpath", '//button[@id="CybotCookiebotDialogBodyLevelButtonLevelOptinAllowAll"]').click()
+    # click cookie consent button
+    driver.find_element("xpath", '//button[@id="CybotCookiebotDialogBodyLevelButtonLevelOptinAllowAll"]').click()
 
-modific_time = driver.find_element("xpath", '//meta[@property="article:modified_time"]').get_attribute("content")
+    x = driver.find_element("xpath", '//meta[@property="article:modified_time"]').get_attribute("content")
 
-time.sleep(5)
+    return x
+
+modific_time = getModifiedTime()
+
 
 print(modific_time)
 
